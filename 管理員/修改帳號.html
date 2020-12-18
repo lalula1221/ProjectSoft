@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <script src="jquery-1.4.min.js"></script>
+    </head>
+    <script>
+        $(document).ready(function () {
+            $('#sub').click(function () {
+                $.post('修改帳號.php', $('form').serialize(), function () {
+                    alert('修改成功');
+                    location.href = '新增_修改_刪除帳號.html';
+                });
+                return false;
+            });
+        });
+    </script>
+    <body>
+        <form>
+            欲修改之原帳號:<input type="text" name="oldAcc" required /><br />
+            欲修改之原密碼:<input type="text" name="oldPass" required /><br />
+            新的密碼:<input type="text" name="newPass" required /><br />
+            <input type="submit" value="修改" id="sub" />
+            <input type="button" value="返回" onclick="location.href='新增_修改_刪除帳號.html'" />
+        </form>
+    </body>
+</html>

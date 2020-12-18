@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <script src="jquery-1.4.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <script>
+        $(document).ready(function () {
+            $('#Search').click(function () {
+                $('.added').remove();
+                $.post('列出某課程的選修學生.php', $('form').serialize(), function (data) {
+                    if (data == 'error1') {
+                        alert('本學期沒有這門課');
+                    } else if (data == 'error2') {
+                        alert('沒有選修的學生');
+                    } else {
+                        Data = JSON.parse(data);
+                        let th1 = $('<th>').text('姓名');
+                        let th2 = $('<th>').text('學號');
+                        let tr1 = $('<tr>').append(th1, th2).attr('class', 'added');
+                        $('table').append(tr1);
+                        for (let index = 0; index < Data.length; index++) {
+                            let td1 = $('<td>').text(Data[index][0]);
+                            let td2 = $('<td>').text(Data[index][1]);
+                            let tr2 = $('<tr>').append(td1, td2).attr('class', 'added');
+                            $('table').append(tr2);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+    <body>
+        <form>
+            <input type="text" name="Code" placeholder="請輸入課程代碼" />
+            <select name="Sem">
+                <option selected>109上</option>
+                <option>109下</option>
+                <option>110上</option>
+            </select>
+            <input type="button" id="Search" value="查詢" />
+            <table></table>
+        </form>
+    </body>
+</html>

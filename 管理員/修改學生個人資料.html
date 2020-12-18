@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>修改學生個人資料</title>
+        <script src="jquery-1.4.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $.get('取得使用者資料(Name_Num_Time).php', function (data) {
+                    let user = JSON.parse(data);
+                    for (let index = 0; index < user.length; index++) {
+                        var td1 = $('<td>').text(user[index][0]);
+                        var td2 = $('<td>').text(user[index][1]);
+                        var td3 = $('<td>').text(user[index][2]);
+                        var tr = $('<tr>').append(td1, td2, td3);
+                        $('table').append(tr);
+                    }
+                });
+                $('#modify').click(function () {
+                    if (
+                        $('#oldNum').val() == '' ||
+                        $('#newName').val() == '' ||
+                        $('#newNum').val() == '' ||
+                        $('#newSem').val() == ''
+                    ) {
+                        alert('請填寫完整');
+                    } else {
+                        $.post('修改學生個人資料.php', $('form').serialize(), function (data) {
+                            if (data == 'error') {
+                                alert('無此學號');
+                            } else {
+                                alert('修改成功');
+                                location.href = '修改學生個人資料.html';
+                            }
+                        });
+                        return false;
+                    }
+                });
+            });
+        </script>
+        <style>
+            table,
+            th,
+            td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 2px;
+                box-sizing: border-box;
+            }
+            table {
+                width: 90%;
+                float: right;
+                margin: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <form>
+            欲修改的使用者原學號:<input type="text" name="oldNum" id="oldNum" /><br />
+            新的姓名:<input type="text" name="newName" id="newName" /><br />
+            新的學號:<input type="text" name="newNum" id="newNum" /> <br />
+            新的入學年份:<input type="" name="newSem" id="newSem" /><br />
+            <input type="submit" value="修改" id="modify" />
+            <input type="button" value="返回" onclick="location.href='管理員.html'" />
+        </form>
+        <table>
+            <tr>
+                <th id="name">姓名</th>
+                <th id="number">學號</th>
+                <th id="entertime">入學年份</th>
+            </tr>
+        </table>
+    </body>
+</html>

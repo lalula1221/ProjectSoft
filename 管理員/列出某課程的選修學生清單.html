@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="jquery-1.4.min.js"></script>
+        <title>Document</title>
+        <script>
+            $(document).ready(function () {
+                $('#Search').click(function () {
+                    $('.added').remove();
+                    $.post('查詢某課程的選修學生.php', $('form').serialize(), function (data) {
+                        if (data == 'error') {
+                            alert('無此課程');
+                        } else if (data == '[]') {
+                            alert('尚無學生選修');
+                        } else {
+                            $('form').append('<table class="added"></table>');
+                            let tr = $('<tr>').attr('class', 'added');
+                            let th = $('<th>').text('學生').attr('class', 'added');
+                            $(tr).append(th);
+                            $('table').append(tr);
+                            var Students = JSON.parse(data);
+                            for (let index = 0; index < Students.length; index++) {
+                                let trS = $('<tr>');
+                                let tdS = $('<td>').text(Students[index]).attr('class', 'added');
+                                $(trS).append(tdS);
+                                $('table').append(trS);
+                            }
+                        }
+                    });
+                    return false;
+                });
+                $('#Back').click(function () {
+                    location.href = '管理員.html';
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <form>
+            <select name="Sem">
+                <option selected>109上</option>
+                <option>109下</option>
+                <option>110上</option>
+            </select>
+            <input type="text" placeholder="欲查詢的課程代號" name="Code" id="Code" />
+            <input type="button" value="查詢" id="Search" />
+            <input type="button" value="返回" id="Back" />
+        </form>
+    </body>
+</html>

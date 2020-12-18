@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>管理員系統</title>
+        <style>
+            div {
+                border: 3px solid violet;
+                border-radius: 12px;
+                margin: 10px;
+                padding: 10px;
+                background-color: slateblue;
+                color: white;
+            }
+            body {
+                background-color: grey;
+            }
+        </style>
+    </head>
+    <body>
+        <span>管理員 <input type="button" value="登出" onclick="location.href='..\\首頁.html'" /></span><br />
+        <div id="div1" onclick="location.href='新增_修改_刪除帳號.html'">帳號</div>
+        <!--YES-->
+        <div id="div2" onclick="location.href='修改學生個人資料.html'">學生資料</div>
+        <!--YES-->
+        <div id="div3" onclick="location.href='關於某學生選修課程.html'">選修課程</div>
+        <!--YES-->
+        <div id="div4" onclick="location.href='查詢_修改學生成績.html'">學生成績</div>
+        <!--YES-->
+        <div id="div5" onclick="location.href='新增_修改_刪除特定學期的課程資訊.html'">課程資訊</div>
+        <!--YES-->
+        <!--代碼、名稱、學分、授課教授和類型(必修/選修)-->
+        <div id="div6" onclick="location.href='列出某課程的選修學生清單.html'">選修清單</div>
+        <!--YES-->
+        <div id="div7" onclick="location.href='產生每位學生的成績單.html'">成績單</div>
+        <!--YES-->
+    </body>
+</html>

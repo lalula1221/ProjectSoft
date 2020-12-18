@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="jquery-1.4.min.js"></script>
+        <title>修改帳號</title>
+        <script>
+            $(document).ready(function () {
+                $.get('取得使用者資料.php', function (data) {
+                    let user = JSON.parse(data);
+                    for (let index = 0; index < user.length; index++) {
+                        var td1 = $('<td>').text(user[index][0]);
+                        var td2 = $('<td>').text(user[index][1]);
+                        var td3 = $('<td>').text(user[index][2]);
+                        var td4 = $('<td>').text(user[index][3]);
+                        var td5 = $('<td>').text(user[index][4]);
+                        var td6 = $('<td>').text(user[index][5]);
+                        var tr = $('<tr>').append(td1, td2, td3, td4, td5, td6);
+                        $('table').append(tr);
+                    }
+                });
+
+                $('#add').click(function () {
+                    $('.added').remove();
+                    $('form').append(
+                        '<br class=added><input type="text" id="Name" class="added" name="newName" placeholder="新增的姓名" required /><br  class=added>',
+                        '<input type="text" id="Number" class="added" name="newNumber" placeholder="新增的學號" required /><br class=added>',
+                        '<input type="text" id="Account" class="added" name="newAccount" placeholder="新增的帳號" required /><br class=added>',
+                        '<input type="text" id="Password" class="added" name="newPassword" placeholder="新增的密碼" required /><br class=added>',
+                        '<input type="text" id="EnterTime" class="added" name="newEnter" placeholder="入學年份" required /><br class=added>',
+                        '<select name="newAutho" class="added"><option selected>學生</option><option>教授</option></select>',
+                        '<input type="button" class="added" onclick="Add_Sub()" value="送出">',
+                    );
+                });
+
+                $('#delete').click(function () {
+                    $('.added').remove();
+                    $('form').append(
+                        '<br class=added><input type="text" class="added" name="Number" placeholder="請輸入欲刪除之學號" required>',
+                        '<input type="button" class="added" onclick="Delete_Sub()" value="送出">',
+                    );
+                });
+
+                $('#back').click(function () {
+                    location.href = '管理員.html';
+                });
+            });
+
+            function Add_Sub() {
+                $.post('新增帳號.php', $('form').serialize(), function (data) {
+                    if (
+                        $('#Name').val() == '' ||
+                        $('#Number').val() == '' ||
+                        $('#Account').val() == '' ||
+                        $('#Password').val() == '' ||
+                        $('#EnterTime').val() == ''
+                    ) {
+                        alert('請填寫完整');
+                    } else {
+                        if (data == 'error') {
+                            alert('密碼或學號重複');
+                        } else if (data == 'success') {
+                            alert('新增成功');
+                            location.href = '新增_修改_刪除帳號.html';
+                        }
+                    }
+                });
+                return false;
+            }
+
+            function Delete_Sub() {
+                $.post('刪除帳號.php', $('form').serialize(), function (data) {
+                    if (data == 'error') {
+                        alert('無此學號');
+                    } else if (data == 'success') {
+                        alert('刪除成功');
+                        location.href = '新增_修改_刪除帳號.html';
+                    }
+                });
+                return false;
+            }
+        </script>
+        <style>
+            table,
+            th,
+            td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 2px;
+                box-sizing: border-box;
+            }
+            table {
+                width: 90%;
+                float: right;
+                margin: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <form>
+            <input type="button" id="add" value="新增帳號" />
+            <input type="button" id="modify" value="修改帳號" />
+            <input type="button" id="delete" value="刪除帳號" />
+            <input type="button" id="back" value="返回" />
+        </form>
+        <table>
+            <tr>
+                <th id="account">帳號</th>
+                <th id="password">密碼</th>
+                <th id="authority">權限</th>
+                <th id="name">姓名</th>
+                <th id="number">學號</th>
+                <th id="entertime">入學時間</th>
+            </tr>
+        </table>
+    </body>
+</html>

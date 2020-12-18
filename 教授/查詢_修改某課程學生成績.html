@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="jquery-1.4.min.js"></script>
+        <title>Document</title>
+        <script>
+            var Result;
+            var StudentsCopy;
+            $(document).ready(function () {
+                $('#Sub').click(function () {
+                    $('.added').remove();
+                    if ($('#Code').val() == '') {
+                        alert('請輸入課程代碼');
+                    } else {
+                        Result = { Sem: $('#Sem').val(), Code: $('#Code').val() };
+                        $.post('查詢學生成績.php', $('form').serialize(), function (data) {
+                            if (data == 'error') {
+                                alert('您沒有這門課');
+                            } else if (data == '[]') {
+                                alert('無學生選修本門課');
+                            } else {
+                                $('form').append('<input type="button" class="added" onclick="Modify()" value="修改">');
+                                $('form').append(
+                                    '<table class="added"><tr><th>學生</th><th>學號</th><th>分數</th></tr></table>',
+                                );
+                                var Students = JSON.parse(data);
+                                StudentsCopy = Students;
+                                Result['Length'] = Students.length; //修改時讀取這個key以方便跑for
+                                for (let index = 0; index < Students.length; index++) {
+                                    let td1 = $('<td>').text(Students[index][0]).attr('class', 'added'); //val=姓名
+                                    let td2 = $('<td>').text(Students[index][1]).attr('class', 'added'); //val=學號
+                                    let td3 = $('<input type="text">')
+                                        .val(Students[index][2])
+                                        .attr('class', 'added')
+                                        .attr('id', Students[index][1]); //val=成績,id=學號
+                                    let tr = $('<tr>').append(td1, td2, td3).attr('class', 'added');
+                                    $('table').append(tr);
+                                }
+                            }
+                        });
+                        return false;
+                    }
+                });
+                $('#Back').click(function () {
+                    location.href = '教授.html';
+                });
+            });
+            function Modify() {
+                let flag = 0;
+                for (let index = 0; index < StudentsCopy.length; index++) {
+                    let StudentsJQ = '#' + StudentsCopy[index][1]; //抓id=學號
+                    Result[StudentsCopy[index][1]] = $(StudentsJQ).val(); //key=學號,value=分數 放進Result
+                    if ($(StudentsJQ).val() > 100 || $(StudentsJQ).val() < 0) {
+                        alert('請輸入正確的分數');
+                        break;
+                    } else {
+                        flag++;
+                    }
+                }
+                if (flag == StudentsCopy.length) {
+                    $.post('修改學生成績.php', Result, function () {
+                        alert('修改成功');
+                        location.href = '查詢_修改某課程學生成績.html';
+                    });
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <form>
+            <input type="text" id="Code" name="Code" placeholder="請輸入課程代碼" />
+            <select name="Sem" id="Sem">
+                <option selected>109上</option>
+                <option>109下</option>
+                <option>110上</option>
+            </select>
+            <input type="button" id="Sub" value="送出" />
+            <input type="button" id="Back" value="返回" />
+        </form>
+    </body>
+</html>

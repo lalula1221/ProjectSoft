@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <script src="jquery-1.4.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#butt').click(function () {
+                    $.post('登入.php', $('form').serialize(), function (data) {
+                        let user = JSON.parse(data);
+                        if (user.Authority != 'error') {
+                            if (user.Authority == '學生') {
+                                location.href = './學生/學生.html';
+                            } else if (user.Authority == '教授') {
+                                location.href = './教授/教授.html';
+                            } else if (user.Authority == 'administrator') {
+                                location.href = './管理員/管理員.html';
+                            }
+                        } else {
+                            alert('帳號或密碼有誤');
+                        }
+                    });
+                    return false;
+                });
+            });
+        </script>
+        <style>
+            form {
+                position: fixed;
+                top: 40%;
+                left: 43%;
+            }
+            body {
+                background-color: aqua;
+            }
+            p {
+                font-size: 100px;
+                text-align: center;
+            }
+        </style>
+
+        <title>Document</title>
+    </head>
+    <body class="body">
+        <p><em>登入系統</em></p>
+        <form>
+            <pre>
+帳號 : <input type="text" name="account" /> <br />
+密碼 : <input type="password" name="password" />
+            </pre>
+            <input type="submit" value="log in " id="butt" />
+        </form>
+    </body>
+</html>

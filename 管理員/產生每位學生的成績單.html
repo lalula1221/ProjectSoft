@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="jquery-1.4.min.js"></script>
+        <title>Document</title>
+        <style>
+            table {
+                text-align: right;
+            }
+        </style>
+        <script>
+            $(document).ready(function () {
+                $('#search').click(function () {
+                    if ($('#Number').val() == '') {
+                        alert('請輸入學號');
+                    } else {
+                        $('.added').remove();
+                        $.post('查詢學生成績.php', $('form').serialize(), function (data) {
+                            if (data == 'error') {
+                                alert('無此學生');
+                            } else if (data == '[]') {
+                                alert('此學生無選修課程');
+                            } else {
+                                $('form').append('<table class="added"><tr><th>課程</th><th>分數</th></tr></table>');
+                                var grades = JSON.parse(data);
+                                for (let index = 0; index < grades.length; index++) {
+                                    let classname = $('<td>').text(grades[index][0]).attr('class', 'added');
+                                    let grade = $('<td>').text(grades[index][1]).attr('class', 'added');
+                                    let tr = $('<tr>').append(classname, grade);
+                                    $('table').append(tr);
+                                }
+                            }
+                        });
+                        return false;
+                    }
+                });
+                $('#back').click(function () {
+                    location.href = '管理員.html';
+                });
+                $('#print').click(function () {
+                    $('.forPrint').hide();
+                    window.print();
+                    $('.forPrint').show();
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <form>
+            學號:<input type="text" name="Number" id="Number" placeholder="請輸入欲查詢的學生學號" required />
+            <select id="Sem" name="Sem">
+                <option selected>109上</option>
+                <option>109下</option>
+                <option>110上</option>
+            </select>
+            <input type="button" id="search" value="查詢" class="forPrint" />
+            <input type="button" id="back" value="返回" class="forPrint" />
+            <input type="button" id="print" value="列印" class="forPrint" />
+        </form>
+    </body>
+</html>

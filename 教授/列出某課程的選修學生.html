@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="jquery-1.4.min.js"></script>
+        <title>Document</title>
+        <script>
+            $(document).ready(function () {
+                $('#Search').click(function () {
+                    $('.added').remove();
+                    $.post('列出某課程的選修學生.php', $('form').serialize(), function (data) {
+                        if (data == 'error') {
+                            alert('您沒有這堂課程');
+                        } else if (data == '[]') {
+                            alert('尚無學生');
+                        } else {
+                            $('body').append('<table class="added"><tr><th>學生</th><th>學號</th></tr></table>');
+                            let Students = JSON.parse(data);
+                            for (let index = 0; index < Students.length; index++) {
+                                let td1 = $('<td>').text(Students[index][0]);
+                                let td2 = $('<td>').text(Students[index][1]);
+                                let tr = $('<tr>').append(td1, td2);
+                                $('table').append(tr);
+                            }
+                        }
+                    });
+                });
+                $('#Back').click(function () {
+                    location.href = '教授.html';
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <form>
+            <select name="Sem" id="Sem">
+                <option selected>109上</option>
+                <option>109下</option>
+                <option>110上</option>
+            </select>
+            <input type="text" name="Code" id="Code" placeholder="請輸入課程代碼" />
+            <input type="button" id="Search" value="查詢" />
+            <input type="button" id="Back" value="返回" />
+        </form>
+    </body>
+</html>

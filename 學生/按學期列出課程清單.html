@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="jquery-1.4.min.js"></script>
+        <title>Document</title>
+        <script>
+            let flag = 0;
+            $(document).ready(function () {
+                $.post('按學期列出課程清單.php', $('#form').serialize(), function (data) {
+                    let user = JSON.parse(data);
+                    for (let index = 0; index < user.length; index++) {
+                        var td1 = $('<td>').text(user[index][0]);
+                        var td2 = $('<td>').text(user[index][1]);
+                        var td3 = $('<td>').text(user[index][2]);
+                        var td4 = $('<td>').text(user[index][3]);
+                        var td5 = $('<td>').text(user[index][4]);
+                        var tr = $('<tr class="added">').append(td1, td2, td3, td4, td5);
+                        $('table').append(tr);
+                    }
+                });
+            });
+            function getNewTable() {
+                $('.added').remove();
+                $.post('按學期列出課程清單.php', $('#form').serialize(), function (data) {
+                    let user = JSON.parse(data);
+                    for (let index = 0; index < user.length; index++) {
+                        var td1 = $('<td>').text(user[index][0]);
+                        var td2 = $('<td>').text(user[index][1]);
+                        var td3 = $('<td>').text(user[index][2]);
+                        var td4 = $('<td>').text(user[index][3]);
+                        var td5 = $('<td>').text(user[index][4]);
+                        var tr = $('<tr class="added">').append(td1, td2, td3, td4, td5);
+                        $('table').append(tr);
+                    }
+                });
+            }
+        </script>
+        <style>
+            table,
+            th,
+            td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 2px;
+                box-sizing: border-box;
+            }
+            table {
+                width: 90%;
+                float: right;
+                margin: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <form id="form">
+            <select id="select" name="Sem" onchange="getNewTable()">
+                <option selected>109上</option>
+                <option>109下</option>
+                <option>110上</option>
+            </select>
+            <input type="button" id="back" value="返回" onclick="location.href='學生.html'" />
+            <table>
+                <tr id="static">
+                    <th id="Class">課程</th>
+                    <th id="Type">類型</th>
+                    <th id="Professor">授課教授</th>
+                    <th id="Point">學分</th>
+                    <th id="Code">代碼</th>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

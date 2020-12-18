@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="jquery-1.4.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#del').click(function () {
+                    $.post('刪除帳號.php', $('form').serialize(), function () {
+                        alert('刪除成功');
+                        location.href = '新增_修改_刪除帳號.html';
+                    });
+                    return false;
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <form>
+            欲刪除用戶之學號:<input type="text" name="Number" required /><br />
+            <input type="submit" value="刪除" id="del" />
+            <input type="button" value="返回" onclick="location.href='新增_修改_刪除帳號.html'" />
+        </form>
+    </body>
+</html>

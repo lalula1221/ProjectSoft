@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="jquery-1.4.min.js"></script>
+        <title>Document</title>
+        <script>
+            var dataCopy; //複製從'關於某學生選修課程_修改.php'傳回的data
+            var subject; //存放 學號、學期、各個科目的選修情形
+            $(document).ready(function () {
+                $('#Search').click(function () {
+                    $('#modify_Mod').remove();
+                    if ($('#Number').val() == '') {
+                        alert('請填寫學號');
+                    } else {
+                        $.post('關於某學生選修課程_查詢.php', $('form').serialize(), function (data) {
+                            if (data == 'error') {
+                                alert('無此學生');
+                                location.href = '關於某學生選修課程.html';
+                            } else if (data == '[]') {
+                                alert('無選修的課程');
+                                location.href = '關於某學生選修課程.html';
+                            } else {
+                                var dataC = JSON.parse(data);
+                                $('table').remove();
+                                $('form').append('<table><tr><th>課程</th></tr></table>');
+                                for (let index = 0; index < data.length; index++) {
+                                    let tr = $('<tr>').append($('<td>').text(dataC[index][0]));
+                                    $('table').append(tr);
+                                }
+                            }
+                        });
+                    }
+                });
+                $('#Modify').click(function () {
+                    subject = { Number: $('#Number').val(), Sem: $('#Sem').val() };
+                    if ($('#Number').val() == '') {
+                        alert('請填寫學號');
+                    } else {
+                        $.post('關於某學生選修課程_修改.php', $('form').serialize(), function (data) {
+                            if (data == 'error\r\n') {
+                                alert('無此學生');
+                            } else {
+                                var dataParse = JSON.parse(data);
+                                dataCopy = dataParse;
+                                $('table').remove();
+                                $('#modify_Mod').remove();
+                                $('form').append('<table><tr id="tableHead"><th>課程</th></tr></table>');
+                                for (let index = 0; index < dataParse.length; index++) {
+                                    let td = $('<td>').text(dataParse[index][0]);
+                                    if (dataParse[index][1] == '否') {
+                                        var checkbox = $('<input type="checkbox">')
+                                            .val(dataParse[index][0])
+                                            .attr('checked', false)
+                                            .attr('name', dataParse[index][0])
+                                            .attr('id', dataParse[index][0]);
+                                    } else if (dataParse[index][1] == '是') {
+                                        var checkbox = $('<input type="checkbox">')
+                                            .val(dataParse[index][0])
+                                            .attr('checked', true)
+                                            .attr('name', dataParse[index][0])
+                                            .attr('id', dataParse[index][0]);
+                                    }
+                                    let tr = $('<tr>').append(td, checkbox);
+                                    $('table').append(tr);
+                                }
+                                $('form').append(
+                                    '<input type="button" id="modify_Mod" onclick="modifyMod()" value="修改">',
+                                );
+                            }
+                        });
+                        return false;
+                    }
+                });
+                $('#back').click(function () {
+                    location.href = '管理員.html';
+                });
+            });
+            function modifyMod() {
+                for (let index = 0; index < dataCopy.length; index++) {
+                    let checkboxId = '#' + dataCopy[index][0];
+                    if ($(checkboxId).attr('checked') == '') {
+                        subject[dataCopy[index][0]] = '否';
+                    } else {
+                        subject[dataCopy[index][0]] = '是';
+                    }
+                }
+                $.post('關於某學生選修課程_修改_送出.php', subject, function () {
+                    location.href = '關於某學生選修課程.html';
+                });
+                return false;
+            }
+        </script>
+    </head>
+    <body>
+        <form>
+            <input type="text" id="Number" name="Number" placeholder="欲查詢學生的學號" />
+            <select name="Sem" id="Sem">
+                <option selected>109上</option>
+                <option>109下</option>
+                <option>110上</option>
+            </select>
+            <input type="button" id="Search" value="查看選修課程" />
+            <input type="button" id="Modify" value="修改選修課程" />
+            <input type="button" id="back" value="返回" />
+        </form>
+    </body>
+</html>

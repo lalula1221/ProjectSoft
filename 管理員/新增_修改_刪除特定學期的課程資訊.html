@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="jquery-1.4.min.js"></script>
+        <title>Document</title>
+        <script>
+            let flag = 0;
+            $(document).ready(function () {
+                $.post('取得教授資料.php', $('#form').serialize(), function (data) {
+                    let user = JSON.parse(data);
+                    for (let index = 0; index < user.length; index++) {
+                        var td1 = $('<td>').text(user[index][0]);
+                        var td2 = $('<td>').text(user[index][1]);
+                        var td3 = $('<td>').text(user[index][2]);
+                        var td4 = $('<td>').text(user[index][3]);
+                        var td5 = $('<td>').text(user[index][4]);
+                        var tr = $('<tr class="added">').append(td1, td2, td3, td4, td5);
+                        $('table').append(tr);
+                    }
+                });
+                $('#add').click(function () {
+                    if (flag == 0) {
+                        $('#span').append(
+                            '<br class="new"><input type="text" id="Class" class="new" name="Class" placeholder="新增的課程名稱" required><br class="new">',
+                            '<input type="text" class="new" id="Professor" name="Professor" placeholder="新增的授課教授" required><br class="new">',
+                            '<input type="text" class="new" id="ProfessorNum" name="ProfessorNum" placeholder="教授學號" required><br class="new">',
+                            '<input type="text" class="new" id="Point" name="Point" placeholder="新增的課程學分" required><br class="new">',
+                            '<input type="text" class="new" id="Code" name="Code" placeholder="新增的課程代碼" required><br class="new">',
+                            '<select class="new" name="Type"><option>必修</option><option>選修</option></select><br class="new">',
+                            '<input type="button" class="new" id="subadd" value="送出" onclick="addClass()""><br class="new">',
+                        );
+                        flag++;
+                    } else {
+                        $('.new').remove();
+                        flag--;
+                    }
+                });
+                $('#modify').click(function () {
+                    if (flag == 0) {
+                        $('#span').append(
+                            '<br class="new"><input type="text" id="oldCode" class="new" name="oldCode" placeholder="舊課程代號" required><br class="new">',
+                            '<input type="text" id="newClass" class="new" name="Class" placeholder="新課程名稱" required><br class="new">',
+                            '<input type="text" id="newPro" class="new" name="Professor" placeholder="新授課教授" required><br class="new">',
+                            '<input type="text" id="newPoint" class="new" name="Point" placeholder="新課程學分" required><br class="new">',
+                            '<select class="new" name="Type"><option>必修</option><option>選修</option></select><br class="new">',
+                            '<input type="button" class="new" id="submod" value="送出" onclick="modifyClass()">',
+                        );
+                        flag++;
+                    } else {
+                        $('.new').remove();
+                        flag--;
+                    }
+                });
+                $('#delete').click(function () {
+                    if (flag == 0) {
+                        $('#span').append(
+                            '<input type="text" class="new" name="Code" placeholder="刪除的課程代碼" required>',
+                            '<input type="button" class="new" id="subdel" value="送出" onclick="deleteClass()">',
+                        );
+                        flag++;
+                    } else {
+                        $('.new').remove();
+                        flag--;
+                    }
+                });
+            });
+            function getNewTable() {
+                $('.added').remove();
+                $.post('取得教授資料.php', $('#form').serialize(), function (data) {
+                    let user = JSON.parse(data);
+                    for (let index = 0; index < user.length; index++) {
+                        var td1 = $('<td>').text(user[index][0]);
+                        var td2 = $('<td>').text(user[index][1]);
+                        var td3 = $('<td>').text(user[index][2]);
+                        var td4 = $('<td>').text(user[index][3]);
+                        var td5 = $('<td>').text(user[index][4]);
+                        var tr = $('<tr class="added">').append(td1, td2, td3, td4, td5);
+                        $('table').append(tr);
+                    }
+                });
+            }
+            function addClass() {
+                if (
+                    $('#Class').val() == '' ||
+                    $('#Professor').val() == '' ||
+                    $('#ProfessorNum').val() == '' ||
+                    $('#Point').val() == '' ||
+                    $('#Code').val() == ''
+                ) {
+                    alert('請填寫完整');
+                } else {
+                    $.post('新增課程.php', $('#form').serialize(), function (data) {
+                        if (data == 'error') {
+                            alert('已有重複的課程代碼');
+                        } else {
+                            alert('新增成功');
+                            location.href = '新增_修改_刪除特定學期的課程資訊.html';
+                        }
+                    });
+                    return false;
+                }
+            }
+            function modifyClass() {
+                if (
+                    $('#oldCode').val() == '' ||
+                    $('#newClass').val() == '' ||
+                    $('#newPro').val() == '' ||
+                    $('#newPoint').val() == ''
+                ) {
+                    alert('請填寫完整');
+                } else {
+                    $.post('修改課程.php', $('#form').serialize(), function (data) {
+                        if (data == 'error') {
+                            alert('無此課程');
+                        } else {
+                            alert('修改成功');
+                            location.href = '新增_修改_刪除特定學期的課程資訊.html';
+                        }
+                    });
+                    return false;
+                }
+            }
+            function deleteClass() {
+                $.post('刪除課程.php', $('#form').serialize(), function (data) {
+                    if (data == 'error') {
+                        alert('無此課程');
+                    } else {
+                        alert('刪除成功');
+                        location.href = '新增_修改_刪除特定學期的課程資訊.html';
+                    }
+                });
+                return false;
+            }
+        </script>
+        <style>
+            table,
+            th,
+            td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 2px;
+                box-sizing: border-box;
+            }
+            table {
+                width: 90%;
+                float: right;
+                margin: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <input type="button" id="add" value="新增課程" />
+        <input type="button" id="modify" value="修改課程" />
+        <input type="button" id="delete" value="刪除課程" />
+        <input type="button" id="back" value="返回" onclick="location.href='管理員.html'" />
+        <form id="form">
+            <select id="select" name="Sem" onchange="getNewTable()">
+                <option selected>109上</option>
+                <option>109下</option>
+                <option>110上</option>
+            </select>
+            <span id="span"></span>
+            <table>
+                <tr id="static">
+                    <th id="Class">課程</th>
+                    <th id="Type">類型</th>
+                    <th id="Professor">授課教授</th>
+                    <th id="Point">學分</th>
+                    <th id="Code">代碼</th>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
