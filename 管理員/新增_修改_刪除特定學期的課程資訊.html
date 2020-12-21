@@ -94,6 +94,8 @@
                     $.post('新增課程.php', $('#form').serialize(), function (data) {
                         if (data == 'error') {
                             alert('已有重複的課程代碼');
+                        } else if (data == 'IDerror') {
+                            alert('無此教授或學號、姓名錯誤');
                         } else {
                             alert('新增成功');
                             location.href = '新增_修改_刪除特定學期的課程資訊.html';
