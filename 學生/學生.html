@@ -4,14 +4,55 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
+        <style>
+            div {
+                height: 100px;
+                color: rgb(38, 165, 66);
+                font-size: 1.5cm;
+                text-align: center;
+                line-height: 100px;
+            }
+            input {
+                padding: 5px 15px;
+                background: #ccc;
+                border: 0 none;
+                cursor: pointer;
+                -webkit-border-radius: 5px;
+                border-radius: 5px;
+                position: relative;
+                left: 1450px;
+                top: 0px;
+            }
+            nav a {
+                font-size: 1.2rem;
+                display: block;
+                padding: 10px;
+                color: inherit;
+                text-decoration: none;
+            }
+            nav > ul {
+                background-color: rgb(230, 230, 230);
+                margin: 0;
+                border-radius: 5px;
+            }
+            nav a:hover {
+                background-color: rgb(115, 115, 115);
+                color: white;
+            }
+        </style>
     </head>
     <body>
-        <span>學生 <input type="button" value="登出" onclick="location.href='..\\首頁.html'" /></span><br />
-        <a href="列出自己所上的課程.html">按學期列出自己所上的課程及內容</a><br /><!--YES-->
-        <a href="列出某課程的選修學生.html">列出某課程的選修學生</a><br /><!--YES-->
-        <a href="按學期列出課程清單.html">按學期列出課程清單</a><br />
-        <a href="列印成績單.html">列印成績單</a><br />
-        <a href="修改密碼.html">修改密碼</a
-        ><!--NO-->
+        <div><p>學生</p></div>
+        <input type="button" value="登出" onclick="location.href='..\\首頁.html'" />
+        <hr />
+        <nav>
+            <ul>
+                <li><a href="列出自己所上的課程.html">按學期列出自己所上的課程及內容</a></li> <!--YES-->
+                <li><a href="列出某課程的選修學生.html">列出某課程的選修學生</a></li> <!--YES-->
+                <li><a href="按學期列出課程清單.html">按學期列出課程清單</a></li>
+                <li><a href="列印成績單.html">列印成績單</a></li>
+                <li><a href="修改密碼.html">修改密碼</a></li> <!--NO-->
+            </ul>
+        </nav>
     </body>
 </html>
