@@ -21,7 +21,7 @@
                             } else if (data == '[]') {
                                 alert('無學生選修本門課');
                             } else {
-                                $('form').append('<input type="button" class="added" onclick="Modify()" value="修改">');
+                                $('form').append('<input type="button" id="change" class="added" onclick="Modify()" value="修改">');
                                 $('form').append(
                                     '<table class="added"><tr><th>學生</th><th>學號</th><th>分數</th></tr></table>',
                                 );
@@ -67,8 +67,80 @@
                 }
             }
         </script>
+        <style>
+            div {
+                height: 100px;
+                color: rgb(0, 153, 255);
+                font-size: 1.5cm;
+                text-align: center;
+                line-height: 100px;
+            }
+            #Code{
+                position:relative;
+                width:200px;
+                height: 20px;
+                left:42%;
+            }
+            #Sem{
+                width:65px;
+                height: 25px;
+                position:relative;
+                left:19%;
+                background: rgb(189, 240, 255);
+                color:rgb(0, 66, 87);
+            }
+            #Sub{
+                position:relative;
+                left:37%;
+                width:65px;
+                height: 25px;
+                background: rgb(255, 255, 255);
+                color:rgb(0, 66, 87);
+            }
+            #Back{
+                position:relative;
+                left:95%;
+                padding: 5px 15px;
+                background: #ccc;
+                border: 0 none;
+                cursor: pointer;
+                -webkit-border-radius: 5px;
+                border-radius: 5px;
+                border:3px rgb(92, 120, 134) double;
+            }
+            #Back:hover {
+                background-color: rgb(70, 88, 97);
+                color:rgb(255, 255, 255);
+                border:3px rgb(255, 255, 255) double;
+            }
+            #change{
+                position:relative;
+                left:3px;
+                padding: 5px 15px;
+                background: #ccc;
+                border: 0 none;
+                cursor: pointer;
+                -webkit-border-radius: 5px;
+                border-radius: 5px;
+            }
+            body{
+                background-image: linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%);
+            }
+            
+        </style>
     </head>
     <body>
+        <div>
+            <p>
+                教授
+                <a href="教授.html"
+                ><img src="老師.jpg" alt="教授" title="I am Professor." height="130" style="float: right, margin= 15px"/>
+                </a>
+            </p>
+        </div>
+        <br />
+        <input type="button" id="Back" value="返回" />
+        <hr />
         <form>
             <input type="text" id="Code" name="Code" placeholder="請輸入課程代碼" />
             <select name="Sem" id="Sem">
@@ -77,7 +149,6 @@
                 <option>110上</option>
             </select>
             <input type="button" id="Sub" value="送出" />
-            <input type="button" id="Back" value="返回" />
         </form>
     </body>
 </html>
