@@ -4,12 +4,73 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
+        <style>
+            div {
+                height: 100px;
+                color: rgb(0, 153, 255);
+                font-size: 1.5cm;
+                text-align: center;
+                line-height: 100px;
+            }
+            input{
+                padding: 5px 15px;
+                background: #ccc;
+                border: 0 none;
+                cursor: pointer;
+                -webkit-border-radius: 5px;
+                border-radius: 5px;
+                position: relative;
+                left: 1170px;
+                top: 0px;
+                border:3px rgb(92, 120, 134) double;
+
+            }
+            #logout:hover {
+                background-color: rgb(70, 88, 97);
+                color:rgb(255, 255, 255);
+                border:3px rgb(255, 255, 255) double;
+            }
+            nav a {
+                font-size: 1.2rem;
+                display: block;
+                padding: 10px;
+                color: inherit;
+                text-decoration: none;
+            }
+            nav > ul {
+                background-color: rgb(218, 243, 255);
+                color:rgb(45, 66, 95);
+                margin: 0;
+                border-radius: 5px;
+            }
+            nav a:hover {
+                background-color: rgb(66, 110, 131);
+                color:rgb(255, 255, 255);
+            }
+        </style>
+
     </head>
     <body>
-        <span>教授 <input type="button" value="登出" onclick="location.href='..\\首頁.html'" /></span><br />
-        <a href="按學期列出課程清單.html">按學期列出課程清單</a><br /><!--NO-->
-        <a href="列出某課程的選修學生.html">列出某課程的選修學生</a><br /><!--NO-->
-        <a href="查詢_修改某課程學生成績.html">查詢_修改某課程學生成績</a><br /><!--NO-->
-        <a href="修改密碼.html">修改密碼</a><br /><!--NO-->
+        <div>
+            <p>
+                教授
+                <a href="教授.html"
+                ><img src="老師.jpg" alt="教授" title="I am Professor." height="130" style="float: right, margin= 15px"/>
+                </a>
+            </p>
+        </div>
+        <input type="button" id="logout" value="登出" onclick="location.href='..\\首頁.html'" />
+        <br />
+        <br />
+        <hr />
+        <nav>
+            <ul>
+                <li><a href="按學期列出課程清單.html">按學期列出課程清單</a></li><!--NO-->
+                <li><a href="列出某課程的選修學生.html">列出某課程的選修學生</a></li><!--NO-->
+                <li><a href="查詢_修改某課程學生成績.html">查詢_修改某課程學生成績</a></li><!--NO-->
+                <li><a href="修改密碼.html">修改密碼</a></li><!--NO-->
+            </ul>
+        </nav>
     </body>
 </html>
+
