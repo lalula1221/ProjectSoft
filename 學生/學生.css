@@ -1,0 +1,23 @@
+div {
+    height: 220px;
+    color: rgb(38, 165, 66);
+    font-size: 1.5cm;
+    text-align: center;
+    line-height: 220px;
+}
+img{
+    border-radius: 10px;
+    width: 25%;
+    height: 25%;
+}
+#logout {
+    padding: 5px 15px;
+    background: #ccc;
+    border: 0 none;
+    cursor: pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    position: relative;
+    left: 1450px;
+    top: 0px;
+}
