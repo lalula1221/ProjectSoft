@@ -5,35 +5,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>管理員系統</title>
         <style>
-            div {
-                border: 3px solid violet;
+            .divv {
+                border: 3px solid rgb(158, 129, 175);
                 border-radius: 12px;
                 margin: 10px;
                 padding: 10px;
-                background-color: slateblue;
-                color: white;
+                background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+                color: rgb(83, 73, 53);
+            }
+            #administrator{
+                height: 100px;
+                color: rgb(64, 43, 77);
+                font-size: 1.5cm;
+                text-align: center;
+                line-height: 100px;
+            }
+            input{
+                padding: 5px 15px;
+                background:#ccc;
+                border: 0 none;
+                cursor: pointer;
+                -webkit-border-radius: 5px;
+                border-radius: 5px;
+                position: relative;
+                left: 1170px;
+                top: 0px;
+            }
+            #logout:hover {
+                background-color: rgb(54, 54, 54);
+                color:rgb(255, 255, 255);
             }
             body {
-                background-color: grey;
+                background-color: rgb(255, 255, 255);
             }
         </style>
     </head>
     <body>
-        <span>管理員 <input type="button" value="登出" onclick="location.href='..\\首頁.html'" /></span><br />
-        <div id="div1" onclick="location.href='新增_修改_刪除帳號.html'">帳號</div>
+        <div id="administrator">
+            <p>
+                管理員
+            </p>
+        </div>
+        <input type="button" id="logout" value="登出" onclick="location.href='..\\首頁.html'" />
+        <hr />
+        <br />
+        <div id="div1" class="divv" onclick="location.href='新增_修改_刪除帳號.html'">帳號</div>
         <!--YES-->
-        <div id="div2" onclick="location.href='修改學生個人資料.html'">學生資料</div>
+        <div id="div2" class="divv" onclick="location.href='修改學生個人資料.html'">學生資料</div>
         <!--YES-->
-        <div id="div3" onclick="location.href='關於某學生選修課程.html'">選修課程</div>
+        <div id="div3" class="divv" onclick="location.href='關於某學生選修課程.html'">選修課程</div>
         <!--YES-->
-        <div id="div4" onclick="location.href='查詢_修改學生成績.html'">學生成績</div>
+        <div id="div4" class="divv" onclick="location.href='查詢_修改學生成績.html'">學生成績</div>
         <!--YES-->
-        <div id="div5" onclick="location.href='新增_修改_刪除特定學期的課程資訊.html'">課程資訊</div>
+        <div id="div5" class="divv" onclick="location.href='新增_修改_刪除特定學期的課程資訊.html'">課程資訊</div>
         <!--YES-->
         <!--代碼、名稱、學分、授課教授和類型(必修/選修)-->
-        <div id="div6" onclick="location.href='列出某課程的選修學生清單.html'">選修清單</div>
+        <div id="div6" class="divv" onclick="location.href='列出某課程的選修學生清單.html'">選修清單</div>
         <!--YES-->
-        <div id="div7" onclick="location.href='產生每位學生的成績單.html'">成績單</div>
+        <div id="div7" class="divv" onclick="location.href='產生每位學生的成績單.html'">成績單</div>
         <!--YES-->
     </body>
 </html>
