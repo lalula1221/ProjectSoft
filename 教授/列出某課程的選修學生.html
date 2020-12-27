@@ -31,8 +31,71 @@
                 });
             });
         </script>
+        <style>
+            div {
+                height: 100px;
+                color: rgb(0, 153, 255);
+                font-size: 1.5cm;
+                text-align: center;
+                line-height: 100px;
+            }
+            
+            #Back{
+                position:relative;
+                left:95%;
+                padding: 5px 15px;
+                background: #ccc;
+                border: 0 none;
+                cursor: pointer;
+                -webkit-border-radius: 5px;
+                border-radius: 5px;
+                border:3px rgb(92, 120, 134) double;
+            }
+            #Back:hover {
+                background-color: rgb(70, 88, 97);
+                color:rgb(255, 255, 255);
+                border:3px rgb(255, 255, 255) double;
+            }
+            #Code{
+                position:relative;
+                width:200px;
+                height:20px;
+                left:37%;
+            }
+            #Sem{
+                width:65px;
+                height:25px;
+                position:relative;
+                left:36%;
+                background: rgb(189, 240, 255);
+                color:rgb(0, 66, 87);
+            }
+            #Search{
+                position:relative;
+                left:38%;
+                width:65px;
+                height:26px;
+                background: rgb(255, 255, 255);
+                color:rgb(0, 66, 87);
+            }
+            body{
+                background-image: linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%);
+            }
+        </style>
     </head>
     <body>
+        <div>
+            <p>
+                教授
+                <a href="教授.html"
+                ><img src="老師.jpg" alt="教授" title="I am Professor." height="130" style="float: right, margin= 15px"/>
+                </a>
+            </p>
+        </div>
+        <br />
+        <br />
+        <input type="button" id="Back" value="返回" />
+        <hr />
         <form>
             <select name="Sem" id="Sem">
                 <option selected>109上</option>
@@ -41,7 +104,7 @@
             </select>
             <input type="text" name="Code" id="Code" placeholder="請輸入課程代碼" />
             <input type="button" id="Search" value="查詢" />
-            <input type="button" id="Back" value="返回" />
         </form>
     </body>
 </html>
+
