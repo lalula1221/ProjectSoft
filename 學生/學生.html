@@ -4,25 +4,8 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
+        <link rel="stylesheet" href="學生.css" />
         <style>
-            div {
-                height: 100px;
-                color: rgb(38, 165, 66);
-                font-size: 1.5cm;
-                text-align: center;
-                line-height: 100px;
-            }
-            input {
-                padding: 5px 15px;
-                background: #ccc;
-                border: 0 none;
-                cursor: pointer;
-                -webkit-border-radius: 5px;
-                border-radius: 5px;
-                position: relative;
-                left: 1450px;
-                top: 0px;
-            }
             nav a {
                 font-size: 1.2rem;
                 display: block;
@@ -42,16 +25,23 @@
         </style>
     </head>
     <body>
-        <div><p>學生</p></div>
-        <input type="button" value="登出" onclick="location.href='..\\首頁.html'" />
+        <div>
+            <p>
+                學生
+                <a href="學生.html"
+                    ><img src="學生.jpg" alt="學生" title="I am Student." style="float: right, margin= 15px"
+                /></a>
+            </p>
+        </div>
+        <input type="button" value="登出" id="logout" onclick="location.href='..\\首頁.html'" />
         <hr />
         <nav>
             <ul>
-                <li><a href="列出自己所上的課程.html">按學期列出自己所上的課程及內容</a></li> <!--YES-->
-                <li><a href="列出某課程的選修學生.html">列出某課程的選修學生</a></li> <!--YES-->
+                <li><a href="列出自己所上的課程.html">按學期列出自己所上的課程及內容</a></li>
+                <li><a href="列出某課程的選修學生.html">列出某課程的選修學生</a></li>
                 <li><a href="按學期列出課程清單.html">按學期列出課程清單</a></li>
                 <li><a href="列印成績單.html">列印成績單</a></li>
-                <li><a href="修改密碼.html">修改密碼</a></li> <!--NO-->
+                <li><a href="修改密碼.html">修改密碼</a></li>
             </ul>
         </nav>
     </body>
