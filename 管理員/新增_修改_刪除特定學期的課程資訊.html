@@ -152,13 +152,55 @@
                 float: right;
                 margin: 20px;
             }
+            #administrator{
+                height: 100px;
+                color: rgb(64, 43, 77);
+                font-size: 1.5cm;
+                text-align: center;
+                line-height: 100px;
+            }
+            #back{
+                position:relative;
+                left:95%;
+                padding: 5px 15px;
+                background: rgb(241, 243, 219);
+                border: 0 none;
+                cursor: pointer;
+                -webkit-border-radius: 5px;
+                border-radius: 5px;
+                border:3px rgb(93, 76, 102) double;
+            }
+            #back:hover {
+                background-color: rgb(87, 65, 107);
+                color:rgb(255, 255, 255);
+                border:3px rgb(255, 255, 255) double;
+            }
+            body{
+                background-image: linear-gradient(255deg, #e9defa 0%, #fbfcdb 100%);
+            }
+            #select{
+                background: rgb(255, 248, 189);
+                color:rgb(63, 49, 23);
+                height:25px;
+                width:80px;
+                position:relative;
+                left:18%;
+                top:-25px;
+            }
         </style>
     </head>
     <body>
+        <div id="administrator">
+            <p>
+                管理員
+            </p>
+        </div>
+        <input type="button" id="back" value="返回" onclick="location.href='管理員.html'" />
+        <hr />
+        <br />
         <input type="button" id="add" value="新增課程" />
         <input type="button" id="modify" value="修改課程" />
         <input type="button" id="delete" value="刪除課程" />
-        <input type="button" id="back" value="返回" onclick="location.href='管理員.html'" />
         <form id="form">
             <select id="select" name="Sem" onchange="getNewTable()">
                 <option selected>109上</option>
