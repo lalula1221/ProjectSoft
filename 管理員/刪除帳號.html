@@ -16,12 +16,52 @@
                 });
             });
         </script>
+        <style>
+            #administrator{
+                height: 100px;
+                color: rgb(64, 43, 77);
+                font-size: 1.5cm;
+                text-align: center;
+                line-height: 100px;
+            }
+            #Back{
+                position:relative;
+                left:95%;
+                padding: 5px 15px;
+                background: rgb(241, 243, 219);
+                border: 0 none;
+                cursor: pointer;
+                -webkit-border-radius: 5px;
+                border-radius: 5px;
+                border:3px rgb(93, 76, 102) double;
+            }
+            #Back:hover {
+                background-color: rgb(87, 65, 107);
+                color:rgb(255, 255, 255);
+                border:3px rgb(255, 255, 255) double;
+            }
+            #del{
+                position:relative;
+                left:25%;
+                top:-22px;
+            }
+            body{
+                background-image: linear-gradient(255deg, #e9defa 0%, #fbfcdb 100%);
+            }
+        </style>
     </head>
     <body>
+        <div id="administrator">
+            <p>
+                管理員
+            </p>
+        </div>
+        <input type="button" id="Back" value="返回" onclick="location.href='新增_修改_刪除帳號.html'" />
+        <hr />
+        <br />
         <form>
-            欲刪除用戶之學號:<input type="text" name="Number" required /><br />
+            欲刪除用戶之學號 : <input type="text" name="Number" required /><br />
             <input type="submit" value="刪除" id="del" />
-            <input type="button" value="返回" onclick="location.href='新增_修改_刪除帳號.html'" />
         </form>
     </body>
 </html>
