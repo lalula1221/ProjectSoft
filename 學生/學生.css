@@ -1,15 +1,38 @@
+body{
+    background-image: linear-gradient(-225deg, #FFFEFF 0%, #deffd7 100%);
+}
 div {
-    height: 220px;
+    height: 180px;
     color: rgb(38, 165, 66);
     font-size: 1.5cm;
     text-align: center;
-    line-height: 220px;
+    line-height: 180px;
 }
 img{
+    height : 180px;
     border-radius: 10px;
-    width: 25%;
-    height: 25%;
 }
+table,th,td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 2px;
+    box-sizing: border-box;
+}
+table{
+    width: 90%;
+    float: right;
+    margin: 20px;
+   }
+   table th{
+    border: 1px solid rgb(0, 0, 0);
+    padding: 5px;
+    color:rgb(0, 4, 255);
+   }
+   table td{
+    border: 1px solid white;
+    padding: 5px;
+    color: white;
+   }
 #logout {
     padding: 5px 15px;
     background: #ccc;
@@ -20,4 +43,43 @@ img{
     position: relative;
     left: 1450px;
     top: 0px;
- }
+}
+#Code{
+    position:relative;
+    width:200px;
+    height:20px;
+    left:37%;
+}
+.Sem{
+    width:65px;
+    height:25px;
+    position:relative;
+    left:36%;
+    color:rgb(0, 66, 87);
+}
+#Search {
+    position:relative;
+    left:38%;
+    width:60px;
+    height:26px;
+    background: rgb(255, 255, 255);
+    color:rgb(0, 66, 87);
+}
+#Search:hover {
+    color:rgb(255, 255, 255);
+    background: #5560ff;
+    border: 0 none;
+}
+#print{
+    width:100px;
+    position:relative;
+    left:40%;
+    padding: 5px 15px;
+    background: rgb(0, 110, 255);
+    color:white;
+    border: 0 none;
+    cursor: pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    top: 0px;
+    }
