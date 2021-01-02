@@ -5,6 +5,7 @@
         <script src="jquery-1.4.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
+        <link rel="stylesheet" href="學生.css" />
     </head>
     <script>
         $(document).ready(function () {
@@ -33,15 +34,25 @@
         });
     </script>
     <body>
+        <input type="button" id="back" value="返回" onclick="location.href='學生.html'" />
+        <div>
+            <p>
+                學生
+                <a href="學生.html"
+                    ><img src="學生.jpg" alt="學生" title="I am Student." height="180" style="float: right, margin= 15px"
+                /></a>
+            </p>
+        </div>
+        <input type="button" value="登出" id="logout" onclick="location.href='..\\首頁.html'" />
+        <hr />
         <form>
-            <input type="text" name="Code" placeholder="請輸入課程代碼" />
-            <select name="Sem">
+            <select name="Sem" class="Sem">
                 <option selected>109上</option>
                 <option>109下</option>
                 <option>110上</option>
             </select>
+            <input type="text" name="Code" id="Code" placeholder="請輸入課程代碼" />
             <input type="button" id="Search" value="查詢" />
-            <input type="button" id="back" value="返回" onclick="location.href='學生.html'" />
             <table></table>
         </form>
     </body>
