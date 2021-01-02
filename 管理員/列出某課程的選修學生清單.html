@@ -36,17 +36,56 @@
                 });
             });
         </script>
+        <style>
+            #administrator{
+                height: 100px;
+                color: rgb(64, 43, 77);
+                font-size: 1.5cm;
+                text-align: center;
+                line-height: 100px;
+            }
+            #Back{
+                position:relative;
+                left:95%;
+                padding: 5px 15px;
+                background: rgb(241, 243, 219);
+                border: 0 none;
+                cursor: pointer;
+                -webkit-border-radius: 5px;
+                border-radius: 5px;
+                border:3px rgb(93, 76, 102) double;
+            }
+            #Back:hover {
+                background-color: rgb(87, 65, 107);
+                color:rgb(255, 255, 255);
+                border:3px rgb(255, 255, 255) double;
+            }
+            body{
+                background-image: linear-gradient(255deg, #e9defa 0%, #fbfcdb 100%);
+            }
+            #sem{
+                background: rgb(255, 248, 189);
+                color:rgb(63, 49, 23);
+            }
+        </style>
     </head>
     <body>
+        <div id="administrator">
+            <p>
+                管理員
+            </p>
+        </div>
+        <input type="button" value="返回" id="Back" />
+        <hr />
+        <br />
         <form>
-            <select name="Sem">
+            <select name="Sem" id="sem">
                 <option selected>109上</option>
                 <option>109下</option>
                 <option>110上</option>
             </select>
             <input type="text" placeholder="欲查詢的課程代號" name="Code" id="Code" />
             <input type="button" value="查詢" id="Search" />
-            <input type="button" value="返回" id="Back" />
         </form>
     </body>
 </html>
