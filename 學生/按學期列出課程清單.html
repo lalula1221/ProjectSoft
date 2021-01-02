@@ -4,123 +4,62 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="jquery-1.4.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
-        <script>
-            let flag = 0;
-            $(document).ready(function () {
-                $.post('按學期列出課程清單.php', $('#form').serialize(), function (data) {
-                    let user = JSON.parse(data);
-                    for (let index = 0; index < user.length; index++) {
-                        var td1 = $('<td>').text(user[index][0]);
-                        var td2 = $('<td>').text(user[index][1]);
-                        var td3 = $('<td>').text(user[index][2]);
-                        var td4 = $('<td>').text(user[index][3]);
-                        var td5 = $('<td>').text(user[index][4]);
-                        var tr = $('<tr class="added">').append(td1, td2, td3, td4, td5);
-                        $('table').append(tr);
-                    }
-                });
-            });
-            function getNewTable() {
-                $('.added').remove();
-                $.post('按學期列出課程清單.php', $('#form').serialize(), function (data) {
-                    let user = JSON.parse(data);
-                    for (let index = 0; index < user.length; index++) {
-                        var td1 = $('<td>').text(user[index][0]);
-                        var td2 = $('<td>').text(user[index][1]);
-                        var td3 = $('<td>').text(user[index][2]);
-                        var td4 = $('<td>').text(user[index][3]);
-                        var td5 = $('<td>').text(user[index][4]);
-                        var tr = $('<tr class="added">').append(td1, td2, td3, td4, td5);
-                        $('table').append(tr);
-                    }
-                });
-            }
-        </script>
-        <style>
-            table,
-            th,
-            td {
-                border: 1px solid black;
-                border-collapse: collapse;
-                padding: 2px;
-                box-sizing: border-box;
-            }
-            table {
-                width: 90%;
-                float: right;
-                margin: 20px;
-            }
-            div {
-                height: 100px;
-                color: rgb(0, 153, 255);
-                font-size: 1.5cm;
-                text-align: center;
-                line-height: 100px;
-            }
-            #back{
-                position:relative;
-                left:95%;
-                padding: 5px 15px;
-                background: #ccc;
-                border: 0 none;
-                cursor: pointer;
-                -webkit-border-radius: 5px;
-                border-radius: 5px;
-                border:3px rgb(92, 120, 134) double;
-            }
-            #back:hover {
-                background-color: rgb(70, 88, 97);
-                color:rgb(255, 255, 255);
-                border:3px rgb(255, 255, 255) double;
-            }
-            #select{
-                width:65px;
-                height: 25px;
-                position:relative;
-                left:2%;
-                top:20px;
-                background: rgb(189, 240, 255);
-                color:rgb(0, 66, 87);
-            }
-            body{
-                background-image: linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%);
-            }
-        </style>
+        <link rel=stylesheet href="學生.css">
     </head>
-    <body>
+    <script>
+        $(document).ready(function () {
+            $('#Search').click(function () {
+                $('.added').remove();
+                $.post('列出自己所上的課程.php', { Sem: $('#Sem').val() }, function (data) {
+                    if (data == 'error') {
+                        alert('沒有選修的課程');
+                    } else {
+                        let th1 = $('<th>').text('課程');
+                        let th2 = $('<th>').text('類型');
+                        let th3 = $('<th>').text('授課教授');
+                        let th4 = $('<th>').text('學分');
+                        let th5 = $('<th>').text('課程代碼');
+                        let th6 = $('<th>').text('成績');
+                        let tr1 = $('<tr>').append(th1, th2, th3, th4, th5, th6).attr('class', 'added');
+                        $('table').append(tr1);
+                        var Data = JSON.parse(data);
+                        for (let index = 0; index < Data.length; index++) {
+                            let td1 = $('<td>').text(Data[index][0]);
+                            let td2 = $('<td>').text(Data[index][1]);
+                            let td3 = $('<td>').text(Data[index][2]);
+                            let td4 = $('<td>').text(Data[index][3]);
+                            let td5 = $('<td>').text(Data[index][4]);
+                            let td6 = $('<td>').text(Data[index][5]);
+                            let tr2 = $('<tr>').append(td1, td2, td3, td4, td5, td6).attr('class', 'added');
+                            $('table').append(tr2);
+                        }
+                    }
+                });
+             });
+        });
+</script>
+<body>
+        <input type="button" id="back" value="返回" onclick="location.href='學生.html'" />
         <div>
             <p>
-                教授
-                <a href="教授.html"
-                    ><img
-                        src="老師.jpg"
-                        alt="教授"
-                        title="I am Professor."
-                        height="130"
-                        style="float: right, margin= 15px"
-                    />
-                </a>
+                學生
+                <a href="學生.html"
+                    ><img src="學生.jpg" alt="學生" title="I am Student." style="float: right, margin= 15px"
+                /></a>
             </p>
         </div>
-        <br />
-        <input type="button" id="back" value="返回" onclick="location.href='教授.html'" />
+        <input type="button" value="登出" id="logout" onclick="location.href='..\\首頁.html'" />
         <hr />
-        <form id="form">
-            <select id="select" name="Sem" onchange="getNewTable()">
+        <form>
+            <select name="Sem" class="Sem" style="width:270px">
                 <option selected>109上</option>
                 <option>109下</option>
                 <option>110上</option>
             </select>
-            <table>
-                <tr id="static">
-                    <th id="Class">課程</th>
-                    <th id="Type">類型</th>
-                    <th id="Professor">授課教授</th>
-                    <th id="Point">學分</th>
-                    <th id="Code">代碼</th>
-                </tr>
-            </table>
+            <input type="button" id="Search" value="查詢" />
         </form>
+        <table></table>
     </body>
 </html>
