@@ -9,6 +9,47 @@
             table {
                 text-align: right;
             }
+            #administrator{
+                height: 100px;
+                color: rgb(64, 43, 77);
+                font-size: 1.5cm;
+                text-align: center;
+                line-height: 100px;
+            }
+            #back{
+                position:relative;
+                left:95%;
+                padding: 5px 15px;
+                background: rgb(241, 243, 219);
+                border: 0 none;
+                cursor: pointer;
+                -webkit-border-radius: 5px;
+                border-radius: 5px;
+                border:3px rgb(93, 76, 102) double;
+            }
+            #back:hover {
+                background-color: rgb(87, 65, 107);
+                color:rgb(255, 255, 255);
+                border:3px rgb(255, 255, 255) double;
+            }
+            body{
+                background-image: linear-gradient(255deg, #e9defa 0%, #fbfcdb 100%);
+            }
+            #Sem{
+                background: rgb(255, 248, 189);
+                color:rgb(63, 49, 23);
+                position:relative;
+                left:0.5%;
+                height:25px;
+            }
+            #search{
+                position:relative;
+                left:1%;
+            }
+            #print{
+                position:relative;
+                left:1.5%;
+            }
         </style>
         <script>
             $(document).ready(function () {
@@ -48,15 +89,22 @@
         </script>
     </head>
     <body>
+        <div id="administrator">
+            <p>
+                管理員
+            </p>
+        </div>
+        <input type="button" id="back" value="返回" class="forPrint" />
+        <hr />
+        <br />
         <form>
-            學號:<input type="text" name="Number" id="Number" placeholder="請輸入欲查詢的學生學號" required />
+            學號 : <input type="text" name="Number" id="Number" placeholder="請輸入欲查詢的學生學號" required />
             <select id="Sem" name="Sem">
                 <option selected>109上</option>
                 <option>109下</option>
                 <option>110上</option>
             </select>
             <input type="button" id="search" value="查詢" class="forPrint" />
-            <input type="button" id="back" value="返回" class="forPrint" />
             <input type="button" id="print" value="列印" class="forPrint" />
         </form>
     </body>
